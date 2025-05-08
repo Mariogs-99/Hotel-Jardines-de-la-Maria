@@ -1,0 +1,6 @@
+.stroke-custom {
+    path {
+      stroke-width: 6% !important;
+      /* stroke: white; */
+    }
+  }

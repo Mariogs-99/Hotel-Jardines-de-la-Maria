@@ -1,0 +1,36 @@
+.p-dropdown {
+    background-color: transparent;
+    border: 1% white solid;
+}
+
+.p-dropdown-label {
+    color: white;
+}
+
+.p-dropdown-trigger {
+    color: white;
+}
+
+.p-dropdown:hover {
+    border-color: var(--color-secondary-brown-active);
+
+    .p-dropdown-label {
+        color: var(--color-secondary-brown-active);
+    }
+
+    .p-dropdown-trigger {
+        color: var(--color-secondary-brown-active);
+    }
+}
+
+.p-dropdown:focus {
+    box-shadow: none;
+    border-color: var(--color-secondary-brown-active);
+}
+
+.p-dropdown:active {
+    box-shadow: none;
+    border-color: var(--color-secondary-brown-active);
+}
+
+

@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@font-face{
+  font-family: "Yorkten Slab Cond Medium";
+  font-family: "Proxima Nova Sans Serif Font";
+  src: url("./assets/fonts/title/2a58d5551468b6224ad6a680602335e5.eot");
+  src: url("./assets/fonts/title/2a58d5551468b6224ad6a680602335e5.eot?#iefix")format("embedded-opentype"),
+      url("./assets/fonts/title/2a58d5551468b6224ad6a680602335e5.woff")format("woff"),
+      url("./assets/fonts/title/2a58d5551468b6224ad6a680602335e5.woff2")format("woff2"),
+      url("./assets/fonts/title/2a58d5551468b6224ad6a680602335e5.ttf")format("truetype"),
+      url("./assets/fonts/title/2a58d5551468b6224ad6a680602335e5.svg#Yorkten Slab Cond Medium")format("svg");
+  src: url("./assets/fonts/body/proximanova_regular.ttf");
+  font-weight:normal;
+  font-style:normal;
+  font-display:swap;
+}
+body {
+  font-family: "Proxima Nova Sans Serif Font";
+}
+
+/* custom-theme.css */
+
+.custom-calendar-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.first-day {
+  background-color: var(--color-primary-brown) !important;
+  color: white !important;
+}
+
+.last-day {
+  background-color: var(--color-primary-brown) !important;
+  color: white !important;
+}
+
+.unavailable-day {
+  text-decoration: line-through;
+  color: #000000;
+  text-decoration-thickness: 0.1rem;
+}
+
+
+.ant-radio-button-wrapper-checked {
+  background-color: var(--color-secondary-brown)!important;
+  color: #000000!important;
+  border-color: var(--color-secondary-brown) !important;
+}
+
+.ant-radio-button-wrapper:hover {
+  color: var(--color-primary-brown);
+  background-color: #b19988;
+  border-color: var(--color-secondary-brown);
+}
+
+.ant-radio-button-wrapper-checked:focus {
+  background-color: var(--color-secondary-brown)!important;
+  color: #000000!important;
+  border-color: var(--color-secondary-brown) !important;
+}
+
+
+.p-calendar {
+  width: 100%;
+}
+
+.p-datepicker {
+  color: var(--color-primary-brown);
+  font-family: 'Cabin';
+  border: 0px;
+  width: 100%;
+}
+
+
+.p-datepicker table td > span.p-highlight {
+  background-color: #b19988;
+  color: white;
+}
+
+.p-datepicker table td >span:hover {
+  background-color: var(--color-primary-brown);
+  color: white;
+}
+
+
+.p-datepicker-month, .p-datepicker-year {
+  color: var(--color-primary-brown);
+  font-family: 'cabin';
+  font-size: 1.2rem;
+}
+
+
+
+
+
+@theme {
+    --font-title: "Yorkten Slab Cond Medium", "serif";
+    --font-body: "Proxima Nova Sans Serif Font" , "serif";
+    --font-logo: "Tangerine", "serif";
+    --color-primary-brown: #4A2713;
+    --color-primary-green: #2A7A00;
+    --color-light-pink: #FEF4CB;
+    --color-hover-brown: #F0ECEA;
+    --color-secondary-brown:#B38970;
+    --color-secondary-brown-active: #876A58;
+    --color-gray: #D7D7D9;
+    --color-active-gray: #817D72;
+    --breakpoint-md: 1024px;
+  }

@@ -1,0 +1,15 @@
+@keyframes fade { 
+    from { opacity: 0.5; } 
+  }
+  
+  .blinking {
+    animation: fade 1s infinite alternate;
+  }
+
+
+  
+
+  .animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite  /* ping 1s cubic-bezier(0, 0, 0.2, 1) infinite */;
+}
+
