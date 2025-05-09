@@ -2,6 +2,8 @@ import { useState } from "react";
 import HeaderRoom from "../../components/headerRooms";
 import { CreditCardOutlined, UserOutlined } from "@ant-design/icons";
 import bedIcon from "../../../../assets/bed.png"
+import acIcon from "../../../../assets/air.png"
+import tvIcon from "../../../../assets/smart.png"
 import googlePayIcon from "../../../../assets/googlePayIcon.png"
 import { Radio, RadioChangeEvent } from "antd";
 import { useReservation } from "../../../../context/reservationContext";
@@ -37,8 +39,17 @@ const RoomDetails = () => {
                     </span>
                     <span className="flex gap-3">
                         <img src={bedIcon} alt="bed_icon" className="h-7" />
-                        <p className="text-gray-600">{selectedRoom.bedSize}</p>
+                        <p className="text-gray-600">{selectedRoom.maxCamas}</p>
                     </span>
+                    <span className="flex gap-3">
+                        <img src={acIcon} alt="bed_icon" className="h-7" />
+                        <p className="text-gray-600">Aire acondicionado</p>
+                    </span>
+                    <span className="flex gap-3">
+                        <img src={tvIcon} alt="bed_icon" className="h-7" />
+                        <p className="text-gray-600">SmartTV</p>
+                    </span>
+
                 </span>
                 <div>
                     <h1 className="text-xl text-start font-bold">Detalles</h1>

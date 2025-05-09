@@ -14,6 +14,7 @@ export interface Room {
     roomId: number;
     name: string;
     maxCapacity: number;
+    maxCamas: string;
     description: string;
     price: number;
     categoryRoom: CategoryRoom;

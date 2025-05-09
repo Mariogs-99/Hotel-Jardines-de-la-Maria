@@ -1,6 +1,6 @@
 // import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { forwardRef, useImperativeHandle, useState } from "react";
-
+import CreditCard from "../CreditCard";
 import Input from "../../../../shared/form/Input"
 import { InputOtp } from 'primereact/inputotp';
 // import { makeReservation } from "../../services/reservationService";
@@ -8,9 +8,21 @@ import { InputOtp } from 'primereact/inputotp';
 import { Slide, toast } from "react-toastify";
 
 
-export const PaymentInformationForm = forwardRef((_, ref) => {
+//export const PaymentInformationForm = forwardRef((_, ref)
 
+type FormData = {
+    firstName: string;
+    lastName: string;
+    telephone: string;
+    email: string;
+    cardName: string;
+    cardNumber: string;
+    dueDate: string;
+    CVV: string;
+  };
+  
 
+  export const PaymentInformationForm = forwardRef(({ onSuccess }: { onSuccess: (data: FormData) => void }, ref) => {
     let [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -21,6 +33,34 @@ export const PaymentInformationForm = forwardRef((_, ref) => {
         dueDate: "",
         CVV: ""
     });
+
+    const formatPhoneNumber = (value: string) => {
+        const cleaned = value.replace(/\D/g, "").slice(0, 8);
+        if (cleaned.length <= 4) return cleaned;
+        return `${cleaned.slice(0, 4)}-${cleaned.slice(4)}`;
+    };
+      
+    const formatCardNumber = (value: string) => {
+        const cleaned = value.replace(/\D/g, "").slice(0, 16);
+        return cleaned.replace(/(.{4})/g, "$1 ").trim();
+    };
+
+    const formatDueDate = (value: string) => {
+        if (value.includes("-")) {
+          // caso YYYY-MM-DD
+          const [year, month] = value.split("-");
+          return `${month}/${year.slice(2)}`; // MM/AA
+        }
+      
+        // caso si el usuario escribe 4 dígitos seguidos
+        const cleaned = value.replace(/\D/g, "").slice(0, 4);
+        if (cleaned.length >= 3) {
+          return `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`;
+        }
+        return cleaned;
+    };
+      
+      
 
     // const { selectedRoom, checkIn, checkOut } = useReservation();
 
@@ -36,106 +76,109 @@ export const PaymentInformationForm = forwardRef((_, ref) => {
             theme: "colored",
             transition: Slide,
         });
+    
+        onSuccess(formData); // 🔥 notifica al padre
     }
-    // const handlerReservation = async () => {
-    //     const formatDateToDB = (dateString: string): string => {
-    //         const [day, month, year] = dateString.split("/");
-    //         return `20${year}-${month}-${day}`;
-    //     };
-
-    //     const checkInFormatted = formatDateToDB(checkIn);
-    //     const checkOutFormatted = formatDateToDB(checkOut);
-
-    //     console.log(checkInFormatted, checkOutFormatted);
-
-    //     const body = {
-    //         initDate: checkInFormatted,
-    //         finishDate: checkOutFormatted,
-    //         cantPeople: selectedRoom.maxCapacity,
-    //         email: formData.email,
-    //         phone: formData.telephone,
-    //         payment: selectedRoom.price,
-    //         categoryRoomId: selectedRoom.categoryRoom.categoryRoomId
-    //     }
-
-    //     console.log(body)
-    //     try{
-    //      await makeReservation(body)
-    //      toast.success('Reserva completada correctamente', {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //         transition: Slide,
-    //         });
-    //     }
-    //     catch(error) {
-    //         toast.error('Error en la reserva de la habitación', {
-    //             position: "top-right",
-    //             autoClose: 5000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "colored",
-    //             transition: Slide,
-    //             });
-    //     }
-    // }
+    
+   
 
     useImperativeHandle(ref, () => ({
         submitForm: handlerReservation
     }));
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        let { name, value } = e.target;
+      
+        if (name === "telephone") {
+          value = formatPhoneNumber(value);
+        } else if (name === "cardNumber") {
+          value = formatCardNumber(value);
+        } else if (name === "dueDate") {
+          value = formatDueDate(value);
+        }
+      
+        setFormData({ ...formData, [name]: value });
     };
+      
 
     return (
         <form className="my-5 flex flex-col gap-5">
             <div className="flex flex-col gap-5 clear-start px-5 pt-2 pb-5 rounded-sm">
                 <h1 className="opacity-90 text-xl font-bold">Información de contacto</h1>
                 <span className="flex flex-col gap-1 w-full">
-                    <label htmlFor="firstName" className="opacity-90">Nombres</label>
-                    <Input name="firstName" placeholder="Nombres" type="text" value={formData.firstName} onChange={handleChange} />
+                    <label htmlFor="firstName" className="opacity-90">Nombre</label>
+                    <Input name="firstName" placeholder="Nombre" type="text" value={formData.firstName} onChange={handleChange} />
                 </span>
                 <span className="flex flex-col gap-1 w-full">
-                    <label htmlFor="lastName" className="font-primary">Apellidos</label>
-                    <Input name="lastName" placeholder="Apellidos" type="text" value={formData.lastName} onChange={handleChange} />
+                    <label htmlFor="lastName" className="font-primary">Apellido</label>
+                    <Input name="lastName" placeholder="Apellido" type="text" value={formData.lastName} onChange={handleChange} />
                 </span>
                 <span className="flex flex-col gap-1 w-full">
-                    <label htmlFor="telephone" className="font-primary">Telefono</label>
-                    <Input name="telephone" placeholder="Apellidos" type="number" value={formData.telephone} onChange={handleChange} />
+                    <label htmlFor="telephone" className="font-primary">Teléfono</label>
+                    <Input name="telephone" placeholder="Digite su numero de teléfono" type="text" value={formData.telephone} onChange={handleChange} />
                 </span>
                 <span className="flex flex-col gap-1 w-full">
                     <label htmlFor="email" className="font-primary">Correo</label>
-                    <Input name="email" placeholder="Apellidos" type="email" value={formData.email} onChange={handleChange} />
+                    <Input name="email" placeholder="Correo electrónico" type="email" value={formData.email} onChange={handleChange} />
                 </span>
             </div>
-            <div className="flex flex-col gap-5 clear-start px-5 pt-2 pb-5 rounded-sm">
-                <h1 className="opacity-90 text-xl font-bold">Información de pago</h1>
+            <div className="flex flex-col gap-5 clear-start px-5 pt-2 pb-5 rounded-lg shadow-lg bg-white border border-primary-brown">
+                <h1 className="opacity-90 text-xl font-bold text-primary-brown">Información de pago</h1>
+
+                <div className="flex justify-center">
+                    <CreditCard
+                        cardName={formData.cardName}
+                        cardNumber={formData.cardNumber}
+                        dueDate={formData.dueDate}
+                        CVV={formData.CVV}
+                    />
+                </div>
                 <span className="flex flex-col gap-1 w-full">
                     <label htmlFor="cardName" className="opacity-90">Nombre de tarjeta</label>
-                    <Input name="cardName" placeholder="nombre de tarjeta" type="text" value={formData.cardName} onChange={handleChange} />
+                    <Input
+                    className="bg-gray-50 border-2 border-primary-brown rounded-md px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary-brown"
+                    name="cardName"
+                    placeholder="Nombre en tarjeta"
+                    type="text"
+                    value={formData.cardName}
+                    onChange={handleChange}
+                    />
                 </span>
+
                 <span className="flex flex-col gap-1 w-full">
-                    <label htmlFor="cardNumber" className="font-primary">Número de trajeta</label>
-                    <Input name="cardNumber" placeholder="**** **** **** ****" type="text" value={formData.cardNumber} onChange={handleChange} />
+                    <label htmlFor="cardNumber" className="font-primary">Número de tarjeta</label>
+                    <Input
+                    className="bg-gray-50 border-2 border-primary-brown rounded-md px-3 py-2 text-lg font-mono tracking-widest focus:outline-none focus:ring-2 focus:ring-primary-brown"
+                    name="cardNumber"
+                    placeholder="**** **** **** ****"
+                    type="text"
+                    value={formData.cardNumber}
+                    onChange={handleChange}
+                    />
                 </span>
+
                 <span className="flex flex-col gap-1 w-full">
                     <label htmlFor="dueDate" className="font-primary">Expiración</label>
-                    <Input name="dueDate" placeholder="Apellidos" type="date" value={formData.dueDate} onChange={handleChange} />
+                    <Input
+                    className="bg-gray-50 border-2 border-primary-brown rounded-md px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary-brown"
+                    name="dueDate"
+                    placeholder="MM/AA"
+                    type="text"
+                    value={formData.dueDate}
+                    onChange={handleChange}
+                    />
                 </span>
+
                 <span className="flex flex-col gap-1 w-full">
                     <label htmlFor="CVV" className="font-primary">CVV</label>
-                    <InputOtp value={formData.CVV} onChange={(e: any) => console.log(e.value)} length={3} />
+                    <InputOtp
+                    className="bg-gray-50 border-2 border-primary-brown rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-primary-brown"
+                    value={formData.CVV}
+                    onChange={(e: any) => console.log(e.value)}
+                    length={3}
+                    />
                 </span>
-            </div>
+                </div>
+
 
         </form>
     )

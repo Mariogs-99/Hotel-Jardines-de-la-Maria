@@ -1,4 +1,5 @@
 import { useReservation } from "../../../context/reservationContext";
+import { calculateReservation } from "../../../utils/reservationCalculations";
 
 
 // import { ArrowRightOutlined, CreditCardOutlined, UserOutlined } from "@ant-design/icons";
@@ -7,77 +8,78 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 
 
 export const Bill = () => {
-    const { selectedRoom, checkIn, checkOut } = useReservation();
+     const { selectedRoom, checkIn, checkOut } = useReservation();
 
-    const parseDate = (dateString: string): Date => {
-        const [day, month, year] = dateString.split("/").map(Number);
-        return new Date(2000 + year, month - 1, day); // Ajusta el año y el mes
-    };
-
-    const checkInDate = parseDate(checkIn);
-    const checkOutDate = parseDate(checkOut);
-    
-    const numberOfNights = Math.max(0, (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
-
-    const IVA = 0.10;
-    const precioIVA = (selectedRoom.price * IVA).toFixed(2); // Redondea a 2 decimales
-
-    const total = (parseFloat(selectedRoom.price) + parseFloat(precioIVA)).toFixed(2); // Redondea a 2 decimales
+  const { numberOfNights, subtotal, IVA, total } = calculateReservation(
+    selectedRoom.price,
+    checkIn,
+    checkOut
+  );
 
     return (
-        <>
-            <div className="py-10">
-                <h1 className="text-xl text-start font-bold">Factura</h1>
-                <article className="border border-slate-300 p-5 rounded-sm">
-                    <div className="flex items-end justify-between gap-5 md:gap-5 text-sm">
-                        <div>
-                            <h1 className="text-secondary-brown">Fecha inicio</h1>
-                            <h2 className="opacity-50">Despues de las 15:00</h2>
-                            <h3>{checkIn}</h3>
-                        </div>
-                        <span className="text-secondary-brown self-center">
-                            <ArrowRightOutlined />
-                        </span>
-                        <div>
-                            <h1 className="text-secondary-brown">Fecha fin</h1>
-                            <h2 className="opacity-50">Antes de las 12:00</h2>
-                            <h3>{checkOut}</h3>
-                        </div>
-                        <div >
-                            <h1 className="font-bold">{numberOfNights} Noches</h1>
-                        </div>
-                    </div>
-                    <div className="h-[1px] bg-slate-300 my-5"></div>
-                    <div>
-                        <h1 className="font-bold text-secondary-brown">Detalles de la habitación</h1>
-                        <h1 className="font-bold">{selectedRoom.name}</h1>
-                        <div className="flex flex-col gap-5">
-                            <div className="flex flex-col">
-                                <div className="flex justify-between">
-                                    <p>Tarifa regular, desayuno incluido</p>
-                                    <p>$ {selectedRoom.price}</p>
-                                </div>
-                                <button className="border-0 border-b border-slate-800 hover:cursor-pointer self-end text-sm opacity-50">Ver Detalles</button>
-                            </div>
-                            <div className="flex justify-between">
-                                <h1 className="font-bold">Impuestos y tasas</h1>
-                                <div>
-                                    <p className="text-end">$ {precioIVA}</p>
-                                    <button className="border-0 border-b border-slate-800 hover:cursor-pointer self-end text-sm opacity-50">Ver Detalles</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="h-[1px] bg-slate-300 my-5"></div>
-                    <span className="flex justify-between font-bold">
-                        <h1 className="text-lg">Total a pagar</h1>
-                        <span className="text-end">
-                            <h2>$ {total}</h2>
-                            <p className="text-xs font-light opacity-50">IVA e impuestos incluidos</p>
-                        </span>
-                    </span>
-                </article>
-            </div>
-        </>
-    )
+  <div className="py-10">
+    <h1 className="text-2xl font-bold text-primary-brown mb-4">Factura de Reserva</h1>
+
+    <article className="border border-gray-300 rounded-lg shadow-lg p-6 bg-white">
+      {/* Fechas */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between text-sm gap-4">
+        <div>
+          <p className="text-secondary-brown font-semibold">Fecha de inicio</p>
+          <p className="text-gray-500 text-xs">Check-in después de las 15:00</p>
+          <p className="font-medium">{checkIn}</p>
+        </div>
+
+        <ArrowRightOutlined className="text-secondary-brown hidden md:block" />
+
+        <div>
+          <p className="text-secondary-brown font-semibold">Fecha de salida</p>
+          <p className="text-gray-500 text-xs">Check-out antes de las 12:00</p>
+          <p className="font-medium">{checkOut}</p>
+        </div>
+
+        <div className="text-center md:text-right">
+          <p className="text-gray-500 text-xs">Duración</p>
+          <p className="font-bold">{numberOfNights} noche{numberOfNights !== 1 && "s"}</p>
+        </div>
+      </div>
+
+      <hr className="my-5 border-gray-300" />
+
+      {/* Detalles habitación */}
+      <div>
+        <h2 className="text-secondary-brown font-semibold text-lg mb-1">Detalles de la habitación</h2>
+        <p className="font-bold text-lg">{selectedRoom.name}</p>
+
+        <div className="space-y-3 mt-3">
+          <div className="flex justify-between">
+            <p className="text-sm text-gray-700">Tarifa regular (desayuno incluido)</p>
+            <p className="font-medium">${selectedRoom.price}</p>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="text-sm text-gray-700">Subtotal ({numberOfNights} noche{numberOfNights !== 1 && "s"})</p>
+            <p className="font-medium">${subtotal.toFixed(2)}</p>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="text-sm text-gray-700 font-semibold">Impuestos y tasas</p>
+            <p className="font-medium">${IVA}</p>
+          </div>
+        </div>
+      </div>
+
+      <hr className="my-5 border-gray-300" />
+
+      {/* Total */}
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-bold text-primary-brown">Total a pagar</h2>
+        <div className="text-right">
+          <p className="text-2xl font-bold text-primary-brown">${total}</p>
+          <p className="text-xs text-gray-500 italic">IVA e impuestos incluidos</p>
+        </div>
+      </div>
+    </article>
+  </div>
+);
+
 }

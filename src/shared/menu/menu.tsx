@@ -52,7 +52,7 @@ const menuItemsEn = [
 
 function Menu() {
   const [isFixed, setIsFixed] = useState<boolean>(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+ const { isDrawerOpen, setIsDrawerOpen } = useReservation();
   const [openSubmenuIndex, setOpenSubmenuIndex] = useState<number | null>(null);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState<boolean>(false);
 
