@@ -5,6 +5,8 @@ import { PaymentInformationForm } from "../../components/reservationForm/Payment
 import { useRef, useState } from "react";
 import { useReservation } from "../../../../context/reservationContext";
 import { useNavigate } from "react-router-dom";
+import { calculateReservation } from "../../../../utils/reservationCalculations";
+
 
 export const ReservationPayment = () => {
     const formRef = useRef<{ submitForm: () => void }>(null);
@@ -16,6 +18,12 @@ export const ReservationPayment = () => {
         console.log("➡️ Botón presionado, submitForm() ejecutado");
         formRef.current?.submitForm();
     };
+
+    const { total } = calculateReservation(
+        selectedRoom?.price ?? 0,
+        checkIn,
+        checkOut
+    );
 
     const formatDateToISO = (rawDate: Date | string): string => {
         try {
@@ -39,7 +47,7 @@ export const ReservationPayment = () => {
             name: `${formData.firstName} ${formData.lastName}`,
             email: formData.email,
             phone: formData.telephone,
-            payment: selectedRoom?.price ?? 0,
+            payment: total ?? 0,
             categoryRoomId: selectedRoom?.categoryRoom?.categoryRoomId ?? 0,
             roomId: selectedRoom?.id ?? 0 // 👈 Este campo lo debes usar ahora
         };

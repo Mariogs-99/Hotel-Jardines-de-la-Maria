@@ -12,12 +12,12 @@ const Matrimonial = ({ reversed = false }: { reversed?: boolean }) => {
 
   const handleReserve = () => {
     setSelectedRoom({
-      roomId: 3,
-      name: "Habitación Matrimonial",
-      maxCapacity: 2,
-      maxCamas: "Cama Queen Sizes",
+      roomId: 1,
+      name: "Habitación Familiar",
+      maxCapacity: 4,
+      maxCamas: " 2 Cama Queen Sizes",
       description:
-        "Pensada para parejas o viajeros que buscan una experiencia tranquila, esta habitación matrimonial ofrece una cama Queen que garantiza el descanso ideal. Con capacidad para dos personas, su ambiente cálido y acogedor crea el espacio perfecto para relajarse y disfrutar de una estadía placentera.",
+        "Pensada para familias y viajeros que buscan una experiencia tranquila, esta habitación Familiar ofrece una cama Queen que garantiza el descanso ideal. Con capacidad para cuatro personas, su ambiente cálido y acogedor crea el espacio perfecto para relajarse y disfrutar de una estadía placentera.",
       price: 300.0,
       image: [room],
     });
@@ -36,12 +36,12 @@ const Matrimonial = ({ reversed = false }: { reversed?: boolean }) => {
         } px-10 md:px-20 flex flex-col justify-evenly gap-8 md:gap-0`}
       >
         <h1 className="text-3xl md:text-5xl font-title pb-0 text-primary-brown text-start">
-          Habitación Matrimonial
+          Habitación Familiar
         </h1>
         <article className="grid grid-cols-2 gap-x-3 gap-y-4 opacity-75">
           <div className="flex gap-5 items-center">
             <img src={person} alt="" className="h-7" />
-            <p>Hasta 2 personas</p>
+            <p>Hasta 4 personas</p>
           </div>
           <div className="flex gap-5 items-center">
             <img src={size} alt="" className="h-8" />
@@ -49,7 +49,7 @@ const Matrimonial = ({ reversed = false }: { reversed?: boolean }) => {
           </div>
           <div className="flex gap-5 items-center">
             <img src={bed} alt="" className="h-8" />
-            <p>Cama Queen Sizes</p>
+            <p> 2Camas Queen Sizes</p>
           </div>
           <div className="flex gap-5 items-center">
             <img src={air} alt="" className="h-8" />

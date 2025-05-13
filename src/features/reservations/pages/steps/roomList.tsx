@@ -32,8 +32,8 @@ const rooms: RoomWithImage[] = [
         "roomId": 2,
         "name": "Habitación Triple",
         "maxCapacity": 3,
-        "maxCamas": "2 camas Queen Sizes",
-        "description": "Habitación triple con 2 camas Queen Sizes",
+        "maxCamas": "2 Camas Queen Sizes",
+        "description": "Habitación Triple",
         "price": 150.75, //!----Precio a definir
         "categoryRoom": {
             "categoryRoomId": 2,
@@ -48,7 +48,7 @@ const rooms: RoomWithImage[] = [
         "roomId": 3,
         "name": "Habitacion Matrimonial",
         "maxCapacity": 2,
-        "maxCamas": "2 camas Queen Sizes",
+        "maxCamas": "1 cama Queen Sizes",
         "description": "Habitación para parejas o viajeros que buscan una experiencia tranquila",
         "price": 300.00,
         "categoryRoom": {
