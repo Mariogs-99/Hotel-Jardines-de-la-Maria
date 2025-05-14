@@ -17,7 +17,7 @@ const rooms: RoomWithImage[] = [
         "maxCapacity": 4,
         "maxCamas": "2 camas Queen Sizes",
         "description": "Habitación familiar con una sala y una terraza",
-        "price": 120.50, //!----Precio a definir
+        "price": 200.00, //!----Precio a definir
         "categoryRoom": {
             "categoryRoomId": 1,
             "nameCategory": "Familiar",
@@ -50,7 +50,7 @@ const rooms: RoomWithImage[] = [
         "maxCapacity": 2,
         "maxCamas": "1 cama Queen Sizes",
         "description": "Habitación para parejas o viajeros que buscan una experiencia tranquila",
-        "price": 300.00,
+        "price": 185.75,
         "categoryRoom": {
             "categoryRoomId": 3,
             "nameCategory": "Habitación Matrimonial",
@@ -66,7 +66,7 @@ const rooms: RoomWithImage[] = [
         "maxCapacity": 1,
         "maxCamas": "1 cama Twin",
         "description": "Habitación para viajeros solitarios o viajes de negocios",
-        "price": 150.00,
+        "price": 125.00,
         "categoryRoom": {
             "categoryRoomId": 4,
             "nameCategory": "Habitación Individual",

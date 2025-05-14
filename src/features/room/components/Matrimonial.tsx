@@ -18,7 +18,7 @@ const Matrimonial = ({ reversed = false }: { reversed?: boolean }) => {
       maxCamas: "Cama Queen Sizes",
       description:
         "Pensada para parejas o viajeros que buscan una experiencia tranquila, esta habitación matrimonial ofrece una cama Queen que garantiza el descanso ideal. Con capacidad para dos personas, su ambiente cálido y acogedor crea el espacio perfecto para relajarse y disfrutar de una estadía placentera.",
-      price: 300.0,
+      price: 185.75,
       image: [room]
     });
     setIsDrawerOpen(true); // ✅ abre el drawer
@@ -59,7 +59,7 @@ const Matrimonial = ({ reversed = false }: { reversed?: boolean }) => {
           Pensada para parejas o viajeros que buscan una experiencia tranquila, esta habitación matrimonial ofrece una cama Queen que garantiza el descanso ideal. Con capacidad para dos personas, su ambiente cálido y acogedor crea el espacio perfecto para relajarse y disfrutar de una estadía placentera.
         </p>
 
-        <p className="font-bold text-primary-brown text-lg">$300.00 por noche</p>
+        <p className="font-bold text-primary-brown text-lg">$185.75 por noche</p>
 
         <span className="flex gap-10">
           <button

@@ -17,7 +17,7 @@ const Individual = ({ reversed = false }: { reversed?: boolean }) => {
       maxCapacity: 1,
       maxCamas: "1 cama Twin",
       description: "Ideal para viajeros solitarios o viajes de negocios, esta habitación individual ofrece una cama Twin confortable y un ambiente tranquilo para un descanso reparador.",
-      price: 150.00,
+      price: 125.00,
       image: [room]
     });
     setStep(1); // ✅ empezamos desde el datepicker
@@ -67,7 +67,7 @@ const Individual = ({ reversed = false }: { reversed?: boolean }) => {
         <p className="text-base leading-8 text-justify">
           Ideal para viajeros solitarios o viajes de negocios, esta habitación individual ofrece una cama Twin confortable y un ambiente tranquilo para un descanso reparador. Con capacidad para una persona, es perfecta para quienes buscan comodidad y funcionalidad en un espacio acogedor.
         </p>
-        <p className="font-bold text-primary-brown text-lg">$150.00 por noche</p>
+        <p className="font-bold text-primary-brown text-lg">$125.00 por noche</p>
         <span className="flex gap-10">
           <button
             onClick={handleReserve}

@@ -18,7 +18,7 @@ const Matrimonial = ({ reversed = false }: { reversed?: boolean }) => {
       maxCamas: " 2 Cama Queen Sizes",
       description:
         "Pensada para familias y viajeros que buscan una experiencia tranquila, esta habitación Familiar ofrece una cama Queen que garantiza el descanso ideal. Con capacidad para cuatro personas, su ambiente cálido y acogedor crea el espacio perfecto para relajarse y disfrutar de una estadía placentera.",
-      price: 300.0,
+      price: 200.0,
       image: [room],
     });
     setIsDrawerOpen(true); // ✅ abre el drawer
@@ -73,7 +73,7 @@ const Matrimonial = ({ reversed = false }: { reversed?: boolean }) => {
           estadía placentera.
         </p>
 
-        <p className="font-bold text-primary-brown text-lg">$300.00 por noche</p>
+        <p className="font-bold text-primary-brown text-lg">$200.00 por noche</p>
 
         <span className="flex gap-10">
           <button
