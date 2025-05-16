@@ -30,9 +30,12 @@ function RoomsPage() {
       </div>
 
       <section className="flex flex-col gap-20 pb-20">
-        {categories.map((cat, index) => (
-          <RoomCategoryCard key={cat.categoryRoomId} data={cat} reversed={index % 2 !== 0} />
-        ))}
+        {categories
+          .filter((cat) => !!cat.imageUrl) // 👈 Solo categorías con imagen asignada
+          .map((cat, index) => (
+            <RoomCategoryCard key={cat.categoryRoomId} data={cat} reversed={index % 2 !== 0} />
+          ))}
+
       </section>
 
       <RoomsBackgroundImages text="Ver actividades" />

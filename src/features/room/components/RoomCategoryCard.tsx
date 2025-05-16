@@ -33,11 +33,11 @@ const RoomCategoryCard = ({
     <section
       className={`flex flex-col md:flex-row ${
         reversed ? "md:flex-row-reverse" : ""
-      } items-center justify-between px-6 md:px-24 py-24 border-b border-gray-200`}
+      } items-center justify-between px-6 md:px-24 py-20 border-b border-gray-100`}
     >
       {/* Imagen */}
       <div className="w-full md:w-1/2 mb-10 md:mb-0 flex justify-center">
-        <div className="w-full max-w-[800px] aspect-[16/9] overflow-hidden rounded-2xl shadow-lg border border-gray-300">
+        <div className="w-full max-w-[800px] aspect-[16/9] overflow-hidden rounded-3xl shadow-md border border-gray-200">
           <img
             src={data.imageUrl}
             alt={data.nameCategoryEs}
@@ -47,57 +47,55 @@ const RoomCategoryCard = ({
       </div>
 
       {/* Texto */}
-      <div className="w-full md:w-1/2 flex flex-col gap-8 md:pl-16">
-        <h1 className="text-6xl font-title text-primary-brown font-bold mb-2 border-b pb-4 border-gray-300">
+      <div className="w-full md:w-1/2 flex flex-col gap-8 md:pl-24 md:pr-8">
+        <h1 className="text-5xl font-semibold text-neutral-800 mb-4">
           {data.nameCategoryEs}
         </h1>
 
         {/* Íconos */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-5 text-lg text-gray-800 border-b border-gray-200 pb-5">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-base text-neutral-700">
           <div className="flex items-center gap-3">
-            <img src={person} alt="persona" className="h-7" />
+            <img src={person} alt="persona" className="h-6 opacity-70" />
             <p>Hasta {data.maxPeople} persona{data.maxPeople > 1 ? "s" : ""}</p>
           </div>
           <div className="flex items-center gap-3">
-            <img src={size} alt="tamaño" className="h-7" />
+            <img src={size} alt="tamaño" className="h-6 opacity-70" />
             <p>{data.roomSize}</p>
           </div>
           <div className="flex items-center gap-3">
-            <img src={bed} alt="cama" className="h-7" />
+            <img src={bed} alt="cama" className="h-6 opacity-70" />
             <p>{data.bedInfo}</p>
           </div>
           {data.hasAc && (
             <div className="flex items-center gap-3">
-              <img src={air} alt="aire" className="h-7" />
+              <img src={air} alt="aire" className="h-6 opacity-70" />
               <p>Aire acondicionado</p>
             </div>
           )}
           {data.hasTv && (
             <div className="flex items-center gap-3">
-              <img src={smart} alt="tv" className="h-7" />
+              <img src={smart} alt="tv" className="h-6 opacity-70" />
               <p>Smart TV</p>
             </div>
           )}
           {data.hasPrivateBathroom && (
             <div className="flex items-center gap-3">
-              <img src={shower} alt="ducha" className="h-7" />
+              <img src={shower} alt="ducha" className="h-6 opacity-70" />
               <p>Baño privado con agua caliente</p>
             </div>
           )}
         </div>
 
-  
-
         {/* Precio y botón */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-3">
-          <p className="text-2xl font-bold text-primary-brown">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pt-6 border-t border-gray-200 mt-4">
+          <p className="text-3xl font-extrabold text-primary-brown tracking-tight">
             {data.minPrice != null
               ? `$${data.minPrice.toFixed(2)} por noche`
               : "Precio no disponible"}
           </p>
           <button
             onClick={handleReserve}
-            className="bg-primary-brown text-white px-8 py-4 text-lg rounded-md shadow-md hover:bg-primary-brown/90 transition"
+            className="bg-primary-brown text-white px-7 py-3 text-base rounded-full shadow hover:shadow-lg hover:bg-primary-brown/90 transition duration-200"
           >
             Reservar
           </button>
